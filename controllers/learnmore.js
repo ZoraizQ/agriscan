@@ -10,3 +10,8 @@ exports.getLearnmore = (req, res) => {
     unknownUser,
   });
 };
+
+exports.postLearnmore = (req, res) => {
+  req.flash('success', { msg: 'File was uploaded successfully.' });
+  res.redirect('/learnmore');
+};

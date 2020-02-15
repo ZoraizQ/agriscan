@@ -10,3 +10,15 @@ block content
         p Click here to learn more and view our data sets.
         p
           a.btn.btn-raised(href='#', role='button') View datasets »
+    br
+    form(role='form', enctype='multipart/form-data', method='POST')
+          input(type='hidden', name='_csrf', value=_csrf)
+          .form-group
+            label.col-form-label.font-weight-bold Upload your Plant's Image
+            .col-md-6
+              input(type='file', name='myFile')
+          br
+          .form-group
+            label.col-form-label.font-weight-bold Click the button to get your coordinates.
+            button(onclick='getLocation()') Get Location
+            #demo

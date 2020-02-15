@@ -137,7 +137,7 @@ app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/learnmore', learnmoreController.getLearnmore);
-// app.post('/learnmore', learnmoreController.postLearnmore);
+app.post('/learnmore', learnmoreController.postLearnmore);
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);

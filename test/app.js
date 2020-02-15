@@ -41,54 +41,6 @@ describe('GET /learnmore', () => {
   });
 });
 
-describe('GET /api/lastfm', () => {
-  it('should return 200 OK', (done) => {
-    request(app)
-      .get('/api/lastfm')
-      .expect(200, done);
-  });
-});
-
-describe('GET /api/twilio', () => {
-  it('should return 200 OK', (done) => {
-    request(app)
-      .get('/api/twilio')
-      .expect(200, done);
-  });
-});
-
-describe('GET /api/stripe', () => {
-  it('should return 200 OK', (done) => {
-    request(app)
-      .get('/api/stripe')
-      .expect(200, done);
-  });
-});
-
-describe('GET /api/scraping', () => {
-  it('should return 200 OK', (done) => {
-    request(app)
-      .get('/api/scraping')
-      .expect(200, done);
-  });
-});
-
-describe('GET /api/lob', () => {
-  it('should return 200 OK', (done) => {
-    request(app)
-      .get('/api/lob')
-      .expect(200, done);
-  });
-});
-
-describe('GET /api/clockwork', () => {
-  it('should return 200 OK', (done) => {
-    request(app)
-      .get('/api/clockwork')
-      .expect(200, done);
-  });
-});
-
 describe('GET /api/upload', () => {
   it('should return 200 OK', (done) => {
     request(app)
