@@ -24,21 +24,19 @@ new Vue({
             <div v-if="preProcessing()" class="card-body msg_card_body">
               <!-- ChatBot Message in For Loop -->
               <div v-for="m in messages">
-                <div v-if="changeIt(botTurn)" class="d-flex justify-content-start mb-4">
+                <div v-if="m['sender']" class="d-flex justify-content-start mb-4">
                   <div class="img_cont_msg">
                     <img src="robot.jpeg" class="rounded-circle user_img_msg">
                   </div>
                   <div class="msg_cotainer">
-                    <div v-if="m['type']">{{m['data']}}</div>
-                    <div v-else><img v-bind:src="m['data']" class="pic_msg"></div>
+                    <div>{{m['data']}}</div>
                     <span class="msg_time">8:40 AM</span>
                   </div>
                 </div>
                 <!-- User Message -->
                 <div v-else class="d-flex justify-content-end mb-4">
                   <div class="msg_cotainer_send">
-                    <div v-if="m['type']">{{m['data']}}</div>
-                    <div v-else><img v-bind:src="m['data']" class="pic_msg"></div>
+                    <div v-if=showImage(m['data'])></div>
                     <span class="msg_time_send">8:55 AM</span>
                   </div>
                   <div class="img_cont_msg">
@@ -62,8 +60,7 @@ new Vue({
     </div>
   `,
   data:{
-    messages: [{'type':1, 'data':'Hi, How are you?'}, {'type':0, 'data':'robot.jpeg'}, {'type':0, 'data':'user.png'}],
-    botTurn: 1,
+    messages: [{'sender':1, 'data':'Hi, I am AgriScan Bot.'}, {'sender':1, 'data':'Please upload the picture of the crop.'}],
     image: null
   },
   methods:{
@@ -86,18 +83,22 @@ new Vue({
     },
     onFilePicked(event) {
       const files = event.target.files;
-      // let filename = files[0].name;
+      let filename = files[0].name;
       const fileReader = new FileReader();
       fileReader.addEventListener('load', () => {
         this.imageUrl = fileReader.result;
       })
       fileReader.readAsDataURL(files[0]);
+
       this.image = files[0];
-      
+      // To save in directory
+      // const imgData = this.showImage(this.image)
+      // console.log(imgData)
+      this.messages.push({'sender':0, 'data':this.image})
       const formData = new FormData();
   
       formData.append('myFile', this.image);
-  
+
       const options = {
         method: 'POST',
         body: formData,
@@ -107,7 +108,20 @@ new Vue({
         }
       };
       delete options.headers['Content-Type'];
-      fetch('/uploads', options); 
+      fetch('/uploads', options);
+    },
+    showImage(inp) {
+      var reader = new FileReader();
+      reader.readAsDataURL(inp); 
+      reader.onloadend = function() {
+          var base64data = reader.result;
+          console.log("base: ", base64data)
+          var image = new Image();
+          image.src = base64data
+          document.getElementById("clientImg").appendChild(image)
+          // console.log("src: ", image.src)
+          return true
+      }
     }
   }
 }).$mount('#root')

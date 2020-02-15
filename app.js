@@ -1,6 +1,7 @@
 /**
  * Module dependencies.
  */
+const port = 8080
 const express = require('express');
 const compression = require('compression');
 const session = require('express-session');
@@ -20,6 +21,7 @@ const sass = require('node-sass-middleware');
 const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 const https = require('https');
+var fs = require('fs');
 var privateKey  = fs.readFileSync('RootCA.key', 'utf8');
 var certificate = fs.readFileSync('RootCA.crt', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
@@ -188,7 +190,7 @@ if (process.env.NODE_ENV === 'development') {
 /**
  * Start Express server.
  */
-var server = https.createServer(options, app);
+var server = https.createServer(credentials, app);
 
 server.listen(port, () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
