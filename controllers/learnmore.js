@@ -2,23 +2,23 @@ const validator = require('validator');
 const nodemailer = require('nodemailer');
 
 /**
- * GET /contact
+ * GET /learnmore
  * Contact form page.
  */
-exports.getContact = (req, res) => {
+exports.getLearnmore = (req, res) => {
   const unknownUser = !(req.user);
 
-  res.render('contact', {
-    title: 'Contact',
+  res.render('learnmore', {
+    title: 'Learn More',
     unknownUser,
   });
 };
 
 /**
- * POST /contact
- * Send a contact form via Nodemailer.
+ * POST /learnmore
+ * Send a learnmore form via Nodemailer.
  */
-exports.postContact = (req, res) => {
+exports.postLearnmore = (req, res) => {
   const validationErrors = [];
   let fromName;
   let fromEmail;
@@ -30,7 +30,7 @@ exports.postContact = (req, res) => {
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/contact');
+    return res.redirect('/learnmore');
   }
 
   if (!req.user) {
@@ -58,7 +58,7 @@ exports.postContact = (req, res) => {
   return transporter.sendMail(mailOptions)
     .then(() => {
       req.flash('success', { msg: 'Email has been sent successfully!' });
-      res.redirect('/contact');
+      res.redirect('/learnmore');
     })
     .catch((err) => {
       if (err.message === 'self signed certificate in certificate chain') {
@@ -75,19 +75,19 @@ exports.postContact = (req, res) => {
         });
         return transporter.sendMail(mailOptions);
       }
-      console.log('ERROR: Could not send contact email after security downgrade.\n', err);
+      console.log('ERROR: Could not send learnmore email after security downgrade.\n', err);
       req.flash('errors', { msg: 'Error sending the message. Please try again shortly.' });
       return false;
     })
     .then((result) => {
       if (result) {
         req.flash('success', { msg: 'Email has been sent successfully!' });
-        return res.redirect('/contact');
+        return res.redirect('/learnmore');
       }
     })
     .catch((err) => {
-      console.log('ERROR: Could not send contact email.\n', err);
+      console.log('ERROR: Could not send learnmore email.\n', err);
       req.flash('errors', { msg: 'Error sending the message. Please try again shortly.' });
-      return res.redirect('/contact');
+      return res.redirect('/learnmore');
     });
 };
