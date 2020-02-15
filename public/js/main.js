@@ -48,7 +48,13 @@ new Vue({
               </div>
             </div>
             <div class="card-footer">
-              <button type="button" class="btn btn-light btn-circle"><i class="fas fa-camera"></i></button> 
+              <button @click="onPickFile" type="button" class="btn btn-light btn-circle"><i class="fas fa-camera"></i></button> 
+              <input
+                type="file"
+                style="display: none"
+                ref="fileInput"
+                accept="image/*"
+                @change="onFilePicked"/>
             </div>
           </div>
         </div>
@@ -57,7 +63,8 @@ new Vue({
   `,
   data:{
     messages: [{'type':1, 'data':'Hi, How are you?'}, {'type':0, 'data':'robot.jpeg'}, {'type':0, 'data':'user.png'}],
-    botTurn: 1
+    botTurn: 1,
+    image: null
   },
   methods:{
     preProcessing(){
@@ -73,6 +80,34 @@ new Vue({
         this.botTurn = 1
         return false
       }
+    },
+    onPickFile() {
+      this.$refs.fileInput.click();
+    },
+    onFilePicked(event) {
+      const files = event.target.files;
+      // let filename = files[0].name;
+      const fileReader = new FileReader();
+      fileReader.addEventListener('load', () => {
+        this.imageUrl = fileReader.result;
+      })
+      fileReader.readAsDataURL(files[0]);
+      this.image = files[0];
+      
+      const formData = new FormData();
+  
+      formData.append('myFile', this.image);
+  
+      const options = {
+        method: 'POST',
+        body: formData,
+        // If you add this, upload won't work
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      };
+      delete options.headers['Content-Type'];
+      fetch('/uploads', options); 
     }
   }
 }).$mount('#root')
