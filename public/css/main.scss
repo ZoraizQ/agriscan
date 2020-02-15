@@ -196,8 +196,9 @@ $enable-gradients: true;
   border-bottom: 0 !important;
 }
 .card-footer{
-border-radius: 0 0 15px 15px !important;
+  border-radius: 0 0 15px 15px !important;
   border-top: 0 !important;
+  text-align: center !important;
 }
 .container{
   align-content: center;
@@ -390,3 +391,17 @@ background-color: rgba(0,0,0,0.2);
   margin-bottom: 15px !important;
   }
 }
+.btn-circle{
+  width: 70px; 
+  height: 70px; 
+  padding: 0px 0px 0px 5px; 
+  border-radius: 35px; 
+  border-color: black;
+  font-size: 45px; 
+  text-align: center !important;
+}
+.card-footer :hover{
+  background-color: black;
+  color: white;
+}
+
