@@ -1,6 +1,6 @@
 /**
  * GET /learnmore
- * Contact form page.
+ * Learn More page.
  */
 exports.getLearnmore = (req, res) => {
   const unknownUser = !(req.user);
