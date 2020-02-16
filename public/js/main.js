@@ -7,7 +7,7 @@ new Vue({
     <div class="container-fluid w-100 h-100">
       <div class="row justify-content-center h-100">
         <div class="col-sm-12 col-md-8 col-xl-10 chat">
-          <div class="card">
+          <div class="bg-white card">
             <!-- Top Profile -->
             <div class="card-header msg_head">
               <div class="d-flex bd-highlight">
@@ -16,7 +16,7 @@ new Vue({
                   <span class="online_icon"></span>
                 </div>
                 <div class="user_info">
-                  <span>Chat with AgrScan Bot</span>
+                  <span style="color: white; font-size: 20px;">Chat with AgriScan Bot</span>
                 </div>
               </div>
             </div>
@@ -46,7 +46,9 @@ new Vue({
               </div>
             </div>
             <div class="card-footer">
-              <button @click="onPickFile" type="button" class="btn btn-light btn-circle"><i class="fas fa-camera"></i></button> 
+              <button @click="onPickFile" type="button" class="btn btn-light btn-circle">
+                <i class="fas fa-camera"></i>
+              </button> 
               <input
                 type="file"
                 style="display: none"
@@ -81,7 +83,7 @@ new Vue({
     onPickFile() {
       this.$refs.fileInput.click();
     },
-    async onFilePicked(event) {
+    onFilePicked(event) {
       const files = event.target.files;
       let filename = files[0].name;
       const fileReader = new FileReader();
@@ -103,27 +105,24 @@ new Vue({
       let base64val = function(x, y) {
         // console.log(y);
         x.push({'sender':0, 'data':y});
+        x.push({'sender':1, 'data':'95% chances of disease'})
       };
       
       y(this.image, this.messages, base64val);
       
       const formData = new FormData();
       formData.append('myFile', this.image);
-      formData.append('fname', filename);
-      
+
       const options = {
         method: 'POST',
         body: formData,
+        // If you add this, upload won't work
         headers: {
           'Content-Type': 'multipart/form-data',
         }
       };
       delete options.headers['Content-Type'];
-      const answer = await fetch('/uploads', options).then((response) => {
-        return response.json();
-      });
-      this.messages.push({'sender':1, 'data':answer.diseaseStatus})
-
+      fetch('/uploads', options);
     },
     showImage(inp, i) {
       $(document).ready(function() {
