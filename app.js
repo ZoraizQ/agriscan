@@ -22,8 +22,8 @@ const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 const https = require('https');
 var fs = require('fs');
-var privateKey  = fs.readFileSync('RootCA.key', 'utf8');
-var certificate = fs.readFileSync('RootCA.crt', 'utf8');
+var privateKey  = fs.readFileSync('selfsigned.key', 'utf8');
+var certificate = fs.readFileSync('selfsigned.crt', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -36,7 +36,7 @@ dotenv.config({ path: '.env.example' });
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
-const learnmoreController = require('./controllers/learnmore');
+const adminController = require('./controllers/admin');
 
 /**
  * API keys and Passport configuration.
@@ -140,8 +140,8 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
-app.get('/learnmore', learnmoreController.getLearnmore);
-app.post('/learnmore', learnmoreController.postLearnmore);
+app.get('/admin', adminController.getAdmin);
+// app.post('/admin', adminController.postAdmin);
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
