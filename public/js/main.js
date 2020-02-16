@@ -91,36 +91,23 @@ new Vue({
       fileReader.readAsDataURL(files[0]);
 
       this.image = files[0];
-      // var base64val = null;
-      // this.helper(this.image, base64val);
+      // console.log(this.image);
 
-      // To save in directory
-      function doStuff(file, (out,_) => {
-        var fr = new FileReader();
-        fr.readAsDataURL(file);
+      let y = function(file, li, callback) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function() {
+          callback(li, reader.result);
+        };
+      };
 
-      });
-      //   var fr = new FileReader();
-      //   fr.readAsDataURL(this.image);
-      //   fr.onloadend = function () {
-      //       var out = fr.result
-      //       console.log(out)
-      //       /* Assuming callback is function */
-      //       callback(out);
-      //   };
-      // };
-
-
-
-
-      // var reader = new FileReader();
-      // reader.readAsDataURL(this.image);
-      // var r = await reader.onloadend(() => {
-      //   return reader.result;
-      // });
-      // var base64 = r.result
-      console.log(base64val);
-      // this.messages.push({'sender':0, 'data':base64val})
+      let base64val = function(x, y) {
+        console.log(y);
+        x.push({'sender':0, 'data':y});
+      };
+      
+      y(this.image, this.messages, base64val);
+      
       const formData = new FormData();
       formData.append('myFile', this.image);
 
