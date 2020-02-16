@@ -18,7 +18,7 @@ exports.postFileUpload = (req, res) => {
 
   // const pythonProcess = cp.spawn('python3',["./cnn/model.py", "./cnn/try.pkl", "./uploads/"+req.body.fname]); //python3 <list of arguments>
 
-  res.json({diseaseStatus: "Healthy Plant"})
+  // res.json({diseaseStatus: "Healthy Plant"})
 //   pythonProcess.stdout.on('data', (data) =>
 //   {
 //     res.json({diseaseStatus: data});

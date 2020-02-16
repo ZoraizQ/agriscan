@@ -105,7 +105,7 @@ new Vue({
       let base64val = function(x, y) {
         // console.log(y);
         x.push({'sender':0, 'data':y});
-        // x.push({'sender':1, 'data':'Healthy Plant'})
+        x.push({'sender':1, 'data':'Healthy Plant'})
       };
       
       y(this.image, this.messages, base64val);
