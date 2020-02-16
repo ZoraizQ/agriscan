@@ -110,7 +110,8 @@ new Vue({
       
       const formData = new FormData();
       formData.append('myFile', this.image);
-
+      formData.append('fname', filename);
+      
       const options = {
         method: 'POST',
         body: formData,
