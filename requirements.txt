@@ -1,4 +1,0 @@
-gunicorn
-numpy
-fastai
-torch
