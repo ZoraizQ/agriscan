@@ -62,7 +62,7 @@ new Vue({
     </div>
   `,
   data:{
-    messages: [{'sender':1, 'data':'Hi, I am AgriScan Bot.'}, {'sender':1, 'data':'Please upload the picture of the crop.'}],
+    messages: [{'sender':1, 'data':'Hi, I am AgriScan Bot. I am a Plant Based Disease Detector.'}, {'sender':1, 'data':'Please upload the picture of the crop.'}],
     image: null
   },
   methods:{
