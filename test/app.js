@@ -33,10 +33,10 @@ describe('GET /api', () => {
   });
 });
 
-describe('GET /learnmore', () => {
+describe('GET /admin', () => {
   it('should return 200 OK', (done) => {
     request(app)
-      .get('/learnmore')
+      .get('/admin')
       .expect(200, done);
   });
 });

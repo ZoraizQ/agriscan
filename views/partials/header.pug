@@ -1,7 +1,7 @@
 .navbar.navbar-light.fixed-top.navbar-expand-lg.bg-light
   .container
     a.navbar-brand(href='/')
-      i.fas.fa-cube
+      i.fas.fa-leaf
       | AgriScan
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='.navbar-collapse')
       span.sr-only Toggle navigation
@@ -10,10 +10,8 @@
       ul.nav.navbar-nav
         li.nav-item(class=(title === 'Home') ? 'active' : undefined)
           a.nav-link(href='/') Home
-        li.nav-item(class=(title === 'Learn More') ? 'active' : undefined)
-          a.nav-link(href='/learnmore') App
-        li.nav-item(class=(title === 'API Examples') ? 'active' : undefined)
-          a.nav-link(href='/api') API Examples
+        li.nav-item(class=(title === 'Admin') ? 'active' : undefined)
+          a.nav-link(href='/admin') Admin
       ul.nav.navbar-nav.ml-auto
         if !user
           li.nav-item(class=(title === 'Login') ? 'active' : undefined)

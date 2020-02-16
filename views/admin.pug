@@ -1,4 +1,4 @@
-extends ../layout
+extends layout
 
 block content
   style.
@@ -8,9 +8,7 @@ block content
     }
 
   .pb-2.mt-2.mb-4.border-bottom
-    h2
-      i.fab.fa-google.fa-sm
-      | Google Maps API
+    h2 Admin Panel
 
   .btn-group.d-flex(role='group')
     a.btn.btn-primary(href='https://developers.google.com/maps/documentation/javascript/tutorial', target='_blank').w-100
@@ -19,8 +17,6 @@ block content
     a.btn.btn-primary(href='https://console.developers.google.com/apis/dashboard', target='_blank').w-100
       i.fas.fa-laptop.fa-sm
       | API Console
-
-  h3 Markers Example
 
   #map
 
@@ -62,3 +58,4 @@ block content
     }
 
   script(async defer src=`https://maps.googleapis.com/maps/api/js?key=${AIzaSyAv1jhxpDSfuq1Lvb2xfSvXlauvMAzbVDk}&callback=initMap`)
+
