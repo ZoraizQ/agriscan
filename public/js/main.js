@@ -23,7 +23,7 @@ new Vue({
             <!-- Messages -->
             <div v-if="preProcessing()" class="card-body msg_card_body">
               <!-- ChatBot Message in For Loop -->
-              <div v-for="m in messages">
+              <div v-for="(m, i) in messages">
                 <div v-if="m['sender']" class="d-flex justify-content-start mb-4">
                   <div class="img_cont_msg">
                     <img src="robot.jpeg" class="rounded-circle user_img_msg">
@@ -35,8 +35,8 @@ new Vue({
                 <!-- User Message -->
                 <div v-else class="d-flex justify-content-end mb-4">
                   <div class="msg_cotainer_send">
-                    <div id="outer" v-if="showImage(m['data'])">
-                      <img id="clientimg" src="" class="pic_msg">
+                    <div id="outer" v-if="showImage(m['data'], i)">
+                      <img v-bind:id="'clientimg'+i" src="" class="pic_msg">
                     </div>
                   </div>
                   <div class="img_cont_msg">
@@ -123,10 +123,12 @@ new Vue({
       delete options.headers['Content-Type'];
       fetch('/uploads', options);
     },
-    showImage(inp) {
+    showImage(inp, i) {
       $(document).ready(function() {
         $('#outer').ready(function() {
-          document.getElementById('clientimg').setAttribute('src', inp);
+          let x = i.toString();
+          // console.log(x)
+          document.getElementById('clientimg'.concat(x)).setAttribute('src', inp);
         });
       });
       return true;
