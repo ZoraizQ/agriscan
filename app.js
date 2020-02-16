@@ -35,7 +35,6 @@ dotenv.config({ path: '.env.example' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
-const apiController = require('./controllers/api');
 const adminController = require('./controllers/admin');
 
 /**
@@ -115,7 +114,7 @@ app.use((req, res, next) => {
     && !req.path.match(/\./)) {
     req.session.returnTo = req.originalUrl;
   } else if (req.user
-    && (req.path === '/account' || req.path.match(/^\/api/))) {
+    && (req.path === '/account')) {
     req.session.returnTo = req.originalUrl;
   }
   next();
@@ -153,12 +152,6 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 /**
  * API examples routes.
  */
-app.get('/api', apiController.getApi);
-app.get('/api/facebook', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
-// app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-// app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
-app.get('/api/google-maps', apiController.getGoogleMaps);
-app.get('/api/google/drive', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getGoogleDrive);
 
 app.post('/uploads', upload.single('myFile'), homeController.postFileUpload);
 
