@@ -21,6 +21,7 @@ body {
   padding-top: 80px;
   margin-bottom: 75px;
   font-size: 14px;
+  background-color: black;
 }
 
 footer {
@@ -52,15 +53,24 @@ textarea {
 }
 
 .navbar{
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding: 10px 0px 10px 0px;
   margin-bottom: 20px;
   display: block;
+  background-color: white;
+}
+
+.nav-link{
+  color: black;
+}
+
+a .nav-link:hover {
+  color: green !important;
 }
 
 .navbar-brand{
-  font-size: 18px;
+  font-size: 23px;
   float: left;
+  color: black;
 }
 
 .navbar-toggler {
@@ -68,10 +78,12 @@ textarea {
   float: right;
   margin-bottom: 8px;
   margin-top: 8px;
+  border: 2px black solid;
 }
 
 .navbar-toggler-icon {
   font-size: 16px;
+  color: black;
 }
 
 .dropdown-menu {
@@ -180,8 +192,11 @@ $enable-gradients: true;
 }
 .card{
   height: 500px;
+  margin-top: 30px;
+  border: 1px black solid;
   border-radius: 15px !important;
-  background-color: rgba(0,0,0,0.4) !important;
+  background-color: white !important;
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', 'sans-serif';
 }
 .contacts_body{
   padding:  0.75rem 0 !important;
@@ -194,6 +209,8 @@ $enable-gradients: true;
 .card-header{
   border-radius: 15px 15px 0 0 !important;
   border-bottom: 0 !important;
+  background-color: green;
+  color: white;
 }
 .card-footer{
   border-radius: 0 0 15px 15px !important;
@@ -319,7 +336,8 @@ margin-top: auto;
 margin-bottom: auto;
 margin-left: 10px;
 border-radius: 25px;
-background-color: #82ccdd;
+background-color: black;
+color: white;
 padding: 10px;
 position: relative;
 }
@@ -328,7 +346,7 @@ margin-top: auto;
 margin-bottom: auto;
 margin-right: 10px;
 border-radius: 25px;
-background-color: #78e08f;
+background-color:grey;
 padding: 10px;
 position: relative;
 }
@@ -395,13 +413,15 @@ background-color: rgba(0,0,0,0.2);
   width: 70px; 
   height: 70px; 
   padding: 0px 0px 0px 5px; 
+  border: 2px green solid;
   border-radius: 35px; 
-  border-color: black;
+  border-color: green;
+  color: green;
   font-size: 45px; 
   text-align: center !important;
 }
 .card-footer :hover{
-  background-color: black;
+  background-color: green;
   color: white;
 }
 .pic_msg{
