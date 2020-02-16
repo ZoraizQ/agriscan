@@ -83,7 +83,7 @@ new Vue({
     onPickFile() {
       this.$refs.fileInput.click();
     },
-    onFilePicked(event) {
+    async onFilePicked(event) {
       const files = event.target.files;
       let filename = files[0].name;
       const fileReader = new FileReader();
@@ -105,7 +105,7 @@ new Vue({
       let base64val = function(x, y) {
         // console.log(y);
         x.push({'sender':0, 'data':y});
-        x.push({'sender':1, 'data':'95% chances of disease'})
+        // x.push({'sender':1, 'data':'95% chances of disease'})
       };
       
       y(this.image, this.messages, base64val);
@@ -122,7 +122,8 @@ new Vue({
         }
       };
       delete options.headers['Content-Type'];
-      fetch('/uploads', options);
+      const answer = await (await fetch('/uploads', options)).json();
+      this.messages.push({'sender':1, 'data':answer.diseaseStatus})
     },
     showImage(inp, i) {
       $(document).ready(function() {
