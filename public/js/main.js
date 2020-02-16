@@ -81,7 +81,7 @@ new Vue({
     onPickFile() {
       this.$refs.fileInput.click();
     },
-    async onFilePicked(event) {
+    onFilePicked(event) {
       const files = event.target.files;
       let filename = files[0].name;
       const fileReader = new FileReader();
@@ -91,7 +91,6 @@ new Vue({
       fileReader.readAsDataURL(files[0]);
 
       this.image = files[0];
-      // console.log(this.image);
 
       let y = function(file, li, callback) {
         var reader = new FileReader();
@@ -104,6 +103,7 @@ new Vue({
       let base64val = function(x, y) {
         console.log(y);
         x.push({'sender':0, 'data':y});
+        x.push({'sender':1, 'data':'Mar Jaaa Tu...'})
       };
       
       y(this.image, this.messages, base64val);
@@ -122,19 +122,11 @@ new Vue({
       delete options.headers['Content-Type'];
       fetch('/uploads', options);
     },
-    helper(inp) {
-      // var reader = new FileReader();
-      // reader.readAsDataURL(inp); 
-      // reader.onloadend = function() {
-      //     var x = reader.result;
-      // };
-    },
     showImage(inp) {
       $(document).ready(function() {
         $('#outer').ready(function() {
           document.getElementById('clientimg').setAttribute('src', inp);
         });
-        // $("clientimg").show();
       });
       return true;
     }
