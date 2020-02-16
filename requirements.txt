@@ -1,4 +1,4 @@
 gunicorn
 numpy
-fastai
+fastai.vision
 torch
