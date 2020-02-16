@@ -1,6 +1,6 @@
-# Project Title
+# AgriScan
 
-AgriScan - Deep Learning based Web App for Detection of Plant Diseases (SDG #2)
+Deep Learning based Web App for Detection of Plant Diseases (SDG #2)
 
 ## Getting Started
 
