@@ -30,14 +30,14 @@ new Vue({
                   </div>
                   <div class="msg_cotainer">
                     <div>{{m['data']}}</div>
-                    <span class="msg_time">8:40 AM</span>
                   </div>
                 </div>
                 <!-- User Message -->
                 <div v-else class="d-flex justify-content-end mb-4">
                   <div class="msg_cotainer_send">
-                    <div v-if=showImage(m['data'])></div>
-                    <span class="msg_time_send">8:55 AM</span>
+                    <div id="outer" v-if="showImage(m['data'])">
+                      <img id="clientimg" src="" class="pic_msg">
+                    </div>
                   </div>
                   <div class="img_cont_msg">
                     <img src="user.png" class="rounded-circle user_img_msg">
@@ -81,22 +81,47 @@ new Vue({
     onPickFile() {
       this.$refs.fileInput.click();
     },
-    onFilePicked(event) {
+    async onFilePicked(event) {
       const files = event.target.files;
       let filename = files[0].name;
       const fileReader = new FileReader();
       fileReader.addEventListener('load', () => {
         this.imageUrl = fileReader.result;
-      })
+      });
       fileReader.readAsDataURL(files[0]);
 
       this.image = files[0];
+      // var base64val = null;
+      // this.helper(this.image, base64val);
+
       // To save in directory
-      // const imgData = this.showImage(this.image)
-      // console.log(imgData)
-      this.messages.push({'sender':0, 'data':this.image})
+      function doStuff(file, (out,_) => {
+        var fr = new FileReader();
+        fr.readAsDataURL(file);
+
+      });
+      //   var fr = new FileReader();
+      //   fr.readAsDataURL(this.image);
+      //   fr.onloadend = function () {
+      //       var out = fr.result
+      //       console.log(out)
+      //       /* Assuming callback is function */
+      //       callback(out);
+      //   };
+      // };
+
+
+
+
+      // var reader = new FileReader();
+      // reader.readAsDataURL(this.image);
+      // var r = await reader.onloadend(() => {
+      //   return reader.result;
+      // });
+      // var base64 = r.result
+      console.log(base64val);
+      // this.messages.push({'sender':0, 'data':base64val})
       const formData = new FormData();
-  
       formData.append('myFile', this.image);
 
       const options = {
@@ -110,18 +135,21 @@ new Vue({
       delete options.headers['Content-Type'];
       fetch('/uploads', options);
     },
+    helper(inp) {
+      // var reader = new FileReader();
+      // reader.readAsDataURL(inp); 
+      // reader.onloadend = function() {
+      //     var x = reader.result;
+      // };
+    },
     showImage(inp) {
-      var reader = new FileReader();
-      reader.readAsDataURL(inp); 
-      reader.onloadend = function() {
-          var base64data = reader.result;
-          console.log("base: ", base64data)
-          var image = new Image();
-          image.src = base64data
-          document.getElementById("clientImg").appendChild(image)
-          // console.log("src: ", image.src)
-          return true
-      }
+      $(document).ready(function() {
+        $('#outer').ready(function() {
+          document.getElementById('clientimg').setAttribute('src', inp);
+        });
+        // $("clientimg").show();
+      });
+      return true;
     }
   }
 }).$mount('#root')
