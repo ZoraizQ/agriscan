@@ -19,10 +19,19 @@ const passport = require('passport');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+var storageCustom  = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads/')
+  },
+  filename: function ( req, file, cb ) {
+      cb( null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storageCustom});
 const https = require('https');
 var fs = require('fs');
-const cp = require("child_process");
+// const cp = require("child_process");
 var privateKey  = fs.readFileSync('selfsigned.key', 'utf8');
 var certificate = fs.readFileSync('selfsigned.crt', 'utf8');
 var credentials = {key: privateKey, cert: certificate};

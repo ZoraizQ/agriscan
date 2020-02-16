@@ -1,3 +1,4 @@
+const cp = require("child_process");
 /**
  * GET /
  * Home page.
@@ -11,15 +12,16 @@ exports.index = (req, res) => {
 exports.postFileUpload = (req, res) => {
   console.log("Request body", req.body)
   console.log("Response body", res.body)
-  // console.log(formData)
+  
   req.flash('success', { msg: 'File was uploaded successfully.' });
   // res.redirect('home');
 
-  const pythonProcess = cp.spawn('python',["./cnn/model.py", "./cnn/try.pkl", "./uploads/testImg.JPG"]); //python3 <list of arguments>
+  const pythonProcess = cp.spawn('python',["./cnn/model.py", "./cnn/try.pkl", "./uploads/"+req.body.fname]); //python3 <list of arguments>
 
+  // res.json({diseaseStatus: "Diseased plant."})
   pythonProcess.stdout.on('data', (data) =>
   {
-    res.send(data);
+    res.json({diseaseStatus: data});
     console.log(`Model returned:\n${data}`); 
   });
 

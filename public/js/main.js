@@ -81,7 +81,7 @@ new Vue({
     onPickFile() {
       this.$refs.fileInput.click();
     },
-    onFilePicked(event) {
+    async onFilePicked(event) {
       const files = event.target.files;
       let filename = files[0].name;
       const fileReader = new FileReader();
@@ -101,9 +101,8 @@ new Vue({
       };
 
       let base64val = function(x, y) {
-        console.log(y);
+        // console.log(y);
         x.push({'sender':0, 'data':y});
-        x.push({'sender':1, 'data':'Mar Jaaa Tu...'})
       };
       
       y(this.image, this.messages, base64val);
@@ -115,13 +114,16 @@ new Vue({
       const options = {
         method: 'POST',
         body: formData,
-        // If you add this, upload won't work
         headers: {
           'Content-Type': 'multipart/form-data',
         }
       };
       delete options.headers['Content-Type'];
-      fetch('/uploads', options);
+      const answer = await fetch('/uploads', options).then((response) => {
+        return response.json();
+      });
+      this.messages.push({'sender':1, 'data':answer.diseaseStatus})
+
     },
     showImage(inp, i) {
       $(document).ready(function() {

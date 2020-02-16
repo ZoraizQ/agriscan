@@ -1,6 +1,6 @@
 import sys
 # from pathlib import Path
-import pytorch
+import torch
 from PIL import Image
 
 MODEL_PATH = sys.argv[1]
