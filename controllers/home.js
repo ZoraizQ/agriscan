@@ -1,8 +1,10 @@
 const cp = require("child_process");
+
 /**
  * GET /
  * Home page.
  */
+
 exports.index = (req, res) => {
   res.render('home', {
     title: 'Home'
@@ -34,4 +36,4 @@ exports.postFileUpload = (req, res) => {
 //   pythonProcess.on('exit', (code) => {
 //       console.log(`child process exited with code ${code}`);
 //   });
-// };
+};
