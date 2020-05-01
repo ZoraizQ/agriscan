@@ -122,8 +122,7 @@ new Vue({
         }
       };
       delete options.headers['Content-Type'];
-      const answer = await (await fetch('/uploads', options)).json();
-      this.messages.push({'sender':1, 'data':answer.diseaseStatus})
+      fetch('/uploads', options);
     },
     showImage(inp, i) {
       $(document).ready(function() {
