@@ -12,28 +12,32 @@ exports.index = (req, res) => {
 };
 
 exports.postFileUpload = (req, res) => {
-  console.log('Request body', req.body);
-  console.log('Response body', res.body);
+  console.log('Request', req.file.filename);
 
   req.flash('success', { msg: 'File was uploaded successfully.' });
-  res.redirect('home');
 
-  const pythonProcess = cp.spawn('python3',["./cnn/model.py", "./cnn/try.pkl", "./uploads/"+req.body.fname]); //python3 <list of arguments>
+  try {
+    const pythonProcess = cp.spawn('python3',["./cnn/model.py", "./cnn/", "./uploads/"+req.file.filename]); //python3 <list of arguments>
 
-  res.json({diseaseStatus: "Healthy Plant"})
-  pythonProcess.stdout.on('data', (data) =>
-    {
-      res.json({diseaseStatus: data});
-      console.log(`Model returned:\n${data}`); 
+    pythonProcess.stdout.on('data', (data) =>
+      {
+        const bufferRes = (new Buffer(data,'utf-8').toString());
+        console.log(bufferRes); 
+        res.json({diseaseStatus: bufferRes.replace('\n', '').split('_').slice(-2).join(' ')});
+      });
+
+    pythonProcess.stderr.on('data', (data) =>
+    {   
+        console.log(`ERROR IN CHILD PROCESS: ${data}`); 
     });
 
-  pythonProcess.stderr.on('data', (data) =>
-  {   
-      console.log(`ERROR IN CHILD PROCESS: ${data}`); 
-  });
 
+    pythonProcess.on('exit', (code) => {
+        console.log(`child process exited with code ${code}`);
+    });
+  }
+  catch (err) {
+    console.log("Error in prediction", err);
+  }
 
-  pythonProcess.on('exit', (code) => {
-      console.log(`child process exited with code ${code}`);
-  });
 };

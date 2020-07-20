@@ -62,7 +62,7 @@ new Vue({
     </div>
   `,
   data:{
-    messages: [{'sender':1, 'data':'Hi, I am AgriScan Bot. I am a Plant Based Disease Detector.'}, {'sender':1, 'data':'Please upload the picture of the crop.'}],
+    messages: [{'sender':1, 'data':'Hi, I am the AgriScan Bot. I am a Plant Based Disease Detector.'}, {'sender':1, 'data':'Please upload the picture of the crop.'}],
     image: null
   },
   methods:{
@@ -91,28 +91,20 @@ new Vue({
         this.imageUrl = fileReader.result;
       });
       fileReader.readAsDataURL(files[0]);
-
       this.image = files[0];
 
-      let y = function(file, li, callback) {
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
+      async function insertImgMsg(img, msgs) {
+        let reader = new FileReader();
+        reader.readAsDataURL(img);
         reader.onloadend = function() {
-          callback(li, reader.result);
+          msgs.push({'sender':0, 'data':reader.result});
         };
       };
 
-      let base64val = function(x, y) {
-        // console.log(y);
-        x.push({'sender':0, 'data':y});
-        x.push({'sender':1, 'data':'Healthy Plant'})
-      };
-      
-      y(this.image, this.messages, base64val);
+      await insertImgMsg(this.image, this.messages);
       
       const formData = new FormData();
       formData.append('myFile', this.image);
-
       const options = {
         method: 'POST',
         body: formData,
@@ -122,7 +114,12 @@ new Vue({
         }
       };
       delete options.headers['Content-Type'];
-      fetch('/uploads', options);
+      const res = await fetch('/uploads', options);
+      const data = await res.json();
+      console.log(data, res);
+
+      this.messages.push({'sender':1, 'data': data.diseaseStatus})
+
     },
     showImage(inp, i) {
       $(document).ready(function() {

@@ -5,15 +5,20 @@ from fastai.vision import *
 
 MODEL_PATH = sys.argv[1]
 IMG_PATH = sys.argv[2]
-print("hello")
 sys.stdout.flush()
-print("modelPath", MODEL_PATH, "imgpath:", IMG_PATH)
 CLASSES = []
 
 def Predict(img):
-    learner = load_learner(MODEL_PATH)
-    CLASSES = learner.data.classes
-    return learner.predict(img)
+    try:
+        learner = load_learner(MODEL_PATH)
+        CLASSES = learner.data.classes
+        pred = learner.predict(img)
+        return pred
+    except:
+        return "Error predicting"
 
-print("Prediction:", Predict(Image.open(IMG_PATH)))
+
+imageObj = open_image(IMG_PATH)
+result = Predict(imageObj)
+print(result[0]) # category only
 sys.stdout.flush()

@@ -1,15 +1,19 @@
 {
-  "name": "hackathon-starter",
+  "name": "AgriScan",
   "version": "6.0.0",
-  "description": "A boilerplate for Node.js web applications",
+  "description": "AgriScan Plant Based Disease Detector",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/ZoraizQ/AgriScan/"
   },
   "license": "MIT",
-  "author": "Sahat Yalkabov",
+  "author": "Team AgriScan",
   "contributors": [
-    "Yashar Fakhari (https://github.com/YasharF)"
+    "Zoraiz Qureshi",
+    "Fahad Farid",
+    "Mohammad Arham",
+    "Saad Ullah",
+    "Junaid Shafique"
   ],
   "scripts": {
     "postinstall": "npm rebuild node-sass",
