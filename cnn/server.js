@@ -12,4 +12,4 @@ pythonProcess.stderr.on('data', (data) =>
 
 pythonProcess.on('exit', (code) => {
     console.log(`child process exited with code ${code}`);
-  });
+});
