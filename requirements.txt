@@ -110,7 +110,7 @@ pyzmq==19.0.1
 qtconsole==4.7.5
 QtPy==1.9.0
 reportlab==3.5.34
-requests==2.11.1
+requests==2.20.0
 requests-toolbelt==0.7.0
 requests-unixsocket==0.2.0
 rsa==4.6
