@@ -220,12 +220,18 @@ $enable-gradients: true;
 .container{
   align-content: center;
 }
+
 .search{
   border-radius: 15px 0 0 15px !important;
   background-color: rgba(0,0,0,0.3) !important;
   border:0 !important;
   color:white !important;
 }
+
+.camera-button-icon {
+  font-size: xx-large;
+}
+
 .search:focus{
      box-shadow:none !important;
        outline:0px !important;
