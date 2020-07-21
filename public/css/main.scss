@@ -60,6 +60,7 @@ textarea {
 }
 
 .nav-link{
+  align-self: center;
   color: black;
 }
 
@@ -191,7 +192,7 @@ $enable-gradients: true;
   margin-bottom: auto;
 }
 .card{
-  height: 500px;
+  height: 75vh;
   margin-top: 30px;
   border: 1px black solid;
   border-radius: 15px !important;
