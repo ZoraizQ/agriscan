@@ -23,7 +23,7 @@ exports.postFileUpload = (req, res) => {
       {
         const bufferRes = (new Buffer(data,'utf-8').toString());
         console.log(bufferRes); 
-        res.json({diseaseStatus: bufferRes.replace('\n', '').split('_').slice(-2).join(' ')});
+        res.json({diseaseStatus: bufferRes.replace('\n', '').split('___')[1].replace('_', ' ')});
       });
 
     pythonProcess.stderr.on('data', (data) =>
