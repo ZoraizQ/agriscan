@@ -81,12 +81,6 @@ app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 app.use(expressStatusMonitor());
 app.use(compression());
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-app.use(sass({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public')
-}));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -105,7 +99,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  console.log(req);
   if (req.path === '/api/upload') {
     // Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
     next();
