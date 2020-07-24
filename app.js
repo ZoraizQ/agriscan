@@ -105,6 +105,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
+  console.log(req);
   if (req.path === '/api/upload') {
     // Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
     next();
@@ -139,7 +140,6 @@ app.use('/', express.static(path.join(__dirname, 'public'), { maxAge: 3155760000
 /**
  * Primary app routes.
  */
-app.get('/', homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -163,7 +163,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
  * API examples routes.
  */
 
-app.post('/uploads', upload.single('myFile'), homeController.postFileUpload);
+app.post('/api/upload', upload.single('myFile'), homeController.postFileUpload);
 
 /**
  * OAuth authentication routes. (Sign in)

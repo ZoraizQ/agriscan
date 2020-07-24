@@ -115,7 +115,8 @@ new Vue({
       delete options.headers['Content-Type'];
 
       try {
-        const res = await fetch('/uploads', options);
+        const url = 'http://139.59.14.103/api/upload';
+        const res = await fetch(url, options);
         const data = await res.json();
         console.log(data, res);
 

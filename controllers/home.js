@@ -5,10 +5,6 @@ const cp = require('child_process');
  * Home page.
  */
 
-exports.index = (req, res) => {
-
-};
-
 exports.postFileUpload = (req, res) => {
   console.log('Request', req.file.filename);
 
