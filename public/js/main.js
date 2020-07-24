@@ -47,7 +47,7 @@ new Vue({
             </div>
             <div class="card-footer">
               <button @click="onPickFile" type="button" class="btn btn-light btn-circle">
-                <i class="fa fa-camera camera-button-icon"></i>
+                <i class="fa fa-camera camera-button-icon" aria-hidden="true"></i>
               </button> 
               <input
                 type="file"
