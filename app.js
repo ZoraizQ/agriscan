@@ -33,7 +33,6 @@ const storageCustom = multer.diskStorage({
 });
 
 const upload = multer({ storage: storageCustom });
-const cp = require("child_process");
 // var privateKey  = fs.readFileSync('selfsigned.key', 'utf8');
 // var certificate = fs.readFileSync('selfsigned.crt', 'utf8');
 // var credentials = {key: privateKey, cert: certificate};
@@ -134,9 +133,8 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 app.use('/', express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
-app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/chart.js/dist'), { maxAge: 31557600000 }));
-app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'), { maxAge: 31557600000 }));
 
 /**
  * Primary app routes.
