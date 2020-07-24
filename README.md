@@ -1,57 +1,52 @@
 # AgriScan
 
 Deep Learning based Web App for Detection of Plant Diseases (SDG #2)
+[DevPost](https://devpost.com/software/hackathon-6gkwix)
 
-## Getting Started
+Send a picture to AgriBot of a tomato plant leaf (updates for more incoming). It will reply with disease classification predictions for your plant regarding Tomato Yellow Leaf Curl Virus (TYLCV). The location of the sender is registered and populated on a disease map for admins to pinpoint sources of early crop disease.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+![SpiderMites](/screenshots/SpiderMites.png)
+![TargetSpot](/screenshots/TargetSpot.png)
+![Healthy](/screenshots/Healthy.png)
+
+View the Jupyter Notebook for the fast-ai CNN to see how the neural network processes data and its accuracy.
 
 ### Prerequisites
 
-NPM, PIP, MongoDB to install all dependencies
-Also hosted on Heroku agriscan.herokuapp.com
-
-What things you need to install the software and how to install them.
-
-Web Frameworks:
-Express.js
-Bootstrap
-Multer
-NodeJS
-MongoDB
-JS
-HTML5
-CSS3
-PUGJS
-VUEJS
-
-Python Libraries:
-gunicorn
-numpy
-fastai
-torch
-
-View the Jupyter Notebook for the DL application on the third link provided in the project submission 
-to see how the neural network processes data and its accuracy.
-
 Uses a JS to Python connector to run the CNN's python model scripts.
+
+NPM, PIP3, MongoDB relevant dependencies.
+
+## Web Frameworks:
+- Express.js
+- Bootstrap
+- Multer
+- NodeJS
+- MongoDB
+- JS
+- HTML5
+- CSS3
+- VUEJS
+
+## Python Libraries:
+- fastai
+- numpy
+- torch
+
 
 ### Installing
 
-Run MongoDB community edition server
-Run on http://localhost:8080 or using the heroku link provided.
-Say what the step will be
-
-```
+Test using the production link provided or using http://localhost:8080 after installing dependencies and running the following.
+```sh
 npm install
+pip3 install -r requirements.txt
+npm start
 ```
 
 ### Facebook Technlogies Used
 
-```
-flow - vs code extension, type checking JS
-pytorch - for training the deep learning network
-```
+- flow - vs code extension, type checking JS
+- pytorch (fastai) - for training the deep learning network 
 
 
 ## Built With

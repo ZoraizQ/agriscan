@@ -6,9 +6,7 @@ const cp = require('child_process');
  */
 
 exports.index = (req, res) => {
-  res.render('home', {
-    title: 'Home'
-  });
+
 };
 
 exports.postFileUpload = (req, res) => {
