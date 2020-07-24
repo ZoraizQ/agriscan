@@ -1,7 +1,3 @@
-$(document).ready(() => {
-
-});
-
 new Vue({
   template:`
     <div class="container-fluid w-100 h-100">
@@ -62,7 +58,10 @@ new Vue({
     </div>
   `,
   data:{
-    messages: [{'sender':1, 'data':'Hi, I am the AgriScan Bot. I am a Plant Based Disease Detector.'}, {'sender':1, 'data':'Please upload the picture of the crop.'}],
+    messages: [
+      {'sender':1, 'data':'Hi, I am the AgriScan Bot. I am a Plant Based Disease Detector.'}, 
+      {'sender':1, 'data':'Please upload the picture of the crop leaf.'}
+    ],
     image: null
   },
   methods:{
@@ -114,11 +113,17 @@ new Vue({
         }
       };
       delete options.headers['Content-Type'];
-      const res = await fetch('/uploads', options);
-      const data = await res.json();
-      console.log(data, res);
 
-      this.messages.push({'sender':1, 'data': data.diseaseStatus})
+      try {
+        const res = await fetch('/uploads', options);
+        const data = await res.json();
+        console.log(data, res);
+
+        this.messages.push({'sender':1, 'data': data.diseaseStatus})
+      }
+      catch (err) {
+        console.log(err);
+      }
 
     },
     showImage(inp, i) {
